@@ -8,9 +8,6 @@ public class DbHelper {
    private int index=0;
    private int roll=1;
 
-   public int getSize(){
-       return size;
-   }
    public int getIndex(){
        return index;
    }
