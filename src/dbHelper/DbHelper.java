@@ -2,31 +2,29 @@ package dbHelper;
 
 import model.Student;
 
+import java.util.ArrayList;
+
 public class DbHelper {
-   private final int size=50;
-   Student[] arr=new Student[size];
-   private int index=0;
+   private final ArrayList<Student> list=new ArrayList<>();
+   private final int totalSize =50;
    private int roll=1;
 
-   public int getIndex(){
-       return index;
-   }
+    public int getCurrentSize(){
+        return list.size();
+    }
     public boolean addNewStudent(Student student){
-        if(index==50){
+        if(getCurrentSize()== totalSize){
             System.out.println("Students full");
             return false;
         }
         student.setRollNo(roll++);
-        arr[index++]=student;
+        list.add(student);
         return true;
     }
-    public Student getStudentByIndex(int i){
-        return arr[i];
+    public Student getStudentByIndex(int index){
+        return list.get(index);
     }
-    public void setStudentByIndex(int i,Student student){
-       arr[i]=student;
-    }
-    public void reduceIndex(){
-       index--;
+    public void deleteById(int index){
+         list.remove(index);
     }
 }

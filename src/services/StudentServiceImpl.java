@@ -27,10 +27,10 @@ public class StudentServiceImpl implements StudentService{
 
     @Override
     public void display() {
-        for(int i=0;i<dbHelper.getIndex();i++){
+        for(int i = 0; i<dbHelper.getCurrentSize(); i++){
             System.out.println(dbHelper.getStudentByIndex(i));
         }
-        if(dbHelper.getIndex()==0) System.out.println("Student database is empty");
+        if(dbHelper.getCurrentSize()==0) System.out.println("Student database is empty");
         try {
             Thread.sleep(2000);
         } catch (InterruptedException e) {
@@ -42,10 +42,7 @@ public class StudentServiceImpl implements StudentService{
     public Boolean delete(int roll) {
         int index=authenticate(roll);
         if(index!=-1){
-            dbHelper.reduceIndex();
-            for(int j=index;j<49;j++){
-                dbHelper.setStudentByIndex(j,dbHelper.getStudentByIndex(j+1));
-            }
+            dbHelper.deleteById(index);
             return true;
         }else return false;
     }
@@ -77,7 +74,7 @@ public class StudentServiceImpl implements StudentService{
     }
 
     public int authenticate(int roll){
-        for(int i=0;i<dbHelper.getIndex();i++){
+        for(int i = 0; i<dbHelper.getCurrentSize(); i++){
             if(dbHelper.getStudentByIndex(i).getRollNo()==roll){
                 return i;
             }
